@@ -1,0 +1,30 @@
+<footer th:fragment="footer"
+	class="monserrat d-flex justify-content-between align-items-center">
+	
+	<div class="d-flex">
+		<div class="me-3">
+			<img th:src="@{/images/logo.png}" width="50" height="auto">
+		</div>
+		<div>
+			<p>contacto@bibliotemiskatonic.mi</p>
+			<p>De Profundis Clamavi</p>
+			<p>&copy;Círculo de Lovecraft</p>			
+		</div>
+	</div>
+
+	<div>
+		<p>Biblioteca Miskatonic</p>
+		<p>13, Maine Street</p>
+		<p>Arkham 04915</p>
+	</div>
+
+	<div class="menu-footer">	
+		<h3 class="title-footer">Navegación</h3>	
+		<ul >
+			<li><a th:href="@{/inicio}"><i class="bi bi-house-door-fill"></i>&nbsp;Inicio</a></li>
+			<li><a th:href="@{/socios/list}"><i class="bi bi-person-fill"></i>&nbsp;Socios</a></li>
+			<li><a th:href="@{/catalogo}"><i class="bi bi-book-half"></i>&nbsp;Catálogo</a></li>
+			<li><a th:href="@{/prestamos}"><i class="bi bi-person-lines-fill"></i>&nbsp;Préstamos</a></li>
+		</ul>
+	</div>
+</footer>

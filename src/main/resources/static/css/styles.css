@@ -1,0 +1,219 @@
+@import url(reset.css);
+
+@import
+	url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap')
+	;
+
+@import
+	url('https://fonts.googleapis.com/css2?family=Handlee&family=Montserrat:wght@400;700&display=swap')
+	;
+
+/*
+    font-family: 'Handlee', cursive;
+    font-family: 'Montserrat', sans-serif;
+    font-family: 'Great Vibes', cursive;
+    font-family: 'Cinzel', serif;
+*/
+* {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 14px;
+}
+
+
+p {
+	margin-bottom: 5px;
+}
+
+.container {
+	max-width: 80vw;
+}
+
+header {
+	height: 12vh;
+	padding: 0 20px;
+	font-family: 'Cinzel', serif;
+	font-weight: bold;
+	background-color: black;
+	background-image: url('/images/miskatonik.jpg');
+	color: white;
+}
+
+.titulo {
+	font-size: 40px;
+}
+
+nav {
+	padding: 0 20px;
+	height: 8vh;
+	background-color: #795548;
+	font-size: 14px;
+}
+
+.material {
+	background-color: #a78172;
+	color: white;
+	font-size: 14px;
+}
+
+.monserrat {
+	font-family: 'Montserrat', sans-serif;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+main {
+	min-height: calc(65vh);
+	padding-bottom: 50px;
+}
+
+footer {
+	color: white;
+	background-color: #a78172;
+	height: 15vh;
+	padding: 0 20px;
+	font-size: 14px;
+}
+
+.menu-footer {
+	padding: 0 50px;
+}
+
+a {
+	text-decoration: none;
+	color: white;
+}
+
+li {
+	margin-bottom: 5px;
+}
+
+.title-footer {
+	text-decoration: underline;
+	margin-bottom: 10px;
+}
+
+.portada {
+	width: 50%;
+	height: auto;
+	border-radius: 5px;
+}
+
+.titulo-seccion {
+	font-size: 30px;
+	font-weight: 600;
+	margin-bottom: 25px;
+}
+
+.nuevo-libro {
+	padding: 20px 0;
+}
+
+.nuevo {
+	background-color: #802c07;
+	color: white;
+	font-size: 14px;
+}
+
+.editar {
+	background-color: #a78172;
+	color: white;
+	font-size: 14px;
+}
+
+.editar-portada {
+	width: 10%;
+	border-radius: 5px;
+	margin-right: 25px;
+}
+
+.activar {
+	background-color: #5b330d;
+	color: white;
+	font-size: 14px;
+}
+
+.prestar {
+	background-color: #8d5a18;
+	color: white;
+	font-size: 14px;
+}
+
+.expurgar {
+	background-color: #c88d24;
+	color: white;
+	font-size: 14px;
+}
+
+.devolver {
+	background-color: #ffce31;
+	color: white;
+	font-size: 14px;
+}
+
+.formulario {
+	padding: 50px;
+	border: 2px dashed #8d5a18;
+	margin-bottom: 25px;
+	border-radius: 10px;
+}
+
+.expurgado {
+background-color: #FC908C;
+	border: 2px dashed #ff5252;
+}
+.table>:not(caption)>*>* {
+	padding: 0.5rem 0;
+}
+.select-title {
+	font-size: 20px;
+	text-decoration: underline;
+	margin-bottom: 20px;
+}
+
+.libro-inicio {	
+	margin-top: 30px;
+	padding: 25px;
+	background-color: #F6DDCC;
+	border-radius: 10px;
+}
+.foto-inicio{
+	width: 80%;
+	height:auto;
+	border-radius: 10px;
+	
+}
+.titulo-inicio{
+	padding: 5px 20px;
+	background-color: #a78172;
+	font-size: 36px;
+	border-radius: 5px;
+	color: white;
+}
+.autor-inicio{
+	padding-left: 20px;
+	font-size: 26px;
+}
+.sinopsis{
+	padding-left: 20px;
+	line-height: 25px;
+}
+.logo-new{
+	margin-left: 20px;
+	width: 35px;
+	height: 35px;
+}
+.aviso-prestamo{
+	padding: 10px;
+	height: 50px;
+	background-color: #FC908C;
+	border: 2px dashed #ff5252;
+	font-size: 18px;
+	margin-bottom: 25px;
+	color: red;
+	border-radius: 5px;
+}
+.hidden{
+	display: none;
+}

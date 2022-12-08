@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
+<link rel="stylesheet" href=
+"https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
+<link rel="stylesheet" th:href="@{/css/styles.css}">
+<title>Biblioteca</title>
+</head>
+<body>
+
+	<header th:insert="/fragments/header :: header"></header>
+
+	<nav th:insert="/fragments/nav :: nav"></nav>
+
+	<main>
+
+		<div class="container pt-3">
+
+			<div th:if="${create}" class="formulario">
+			<h2 class="titulo-seccion " th:text="'Añadir Libro'"></h2>
+				<form th:action="@{/catalogo/create}" method="post"
+					th:object="${libro}" enctype="multipart/form-data">
+					<div class="form-group justify-content-around mb-3">
+						<input type="text" class="form-control" id="titulo"
+							placeholder="Titulo del libro" th:field="*{titulo}">
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></small>	
+					</div>
+					<div class="form-group justify-content-around mb-3">
+						<input type="text" class="form-control" id="autor"
+							placeholder="Nombre del autor" th:field="*{autor}">
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('autor')}" th:errors="*{autor}"></small>	
+					</div>
+					<div class="form-group justify-content-around mb-3">
+						<input type="date" class="form-control" id="fechaAdquisicion"
+							th:field="*{fechaAdquisicion}">
+						<small class="form-text text-danger" th:if="${#fields.hasErrors('fechaAdquisicion')}" th:errors="*{fechaAdquisicion}"></small>
+					</div>
+					<div class="d-flex">
+						<div class="form-check me-5">
+							<input class="form-check-input" type="radio"
+								th:field="*{expurgado}" th:value="true" /> <label
+								th:text="'Expurgado'"></label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="radio"
+								th:field="*{expurgado}" th:value="false" /> <label
+								th:text="'No Expurgado'"></label>
+						</div>
+					</div>
+					<div class="form-group justify-content-around mb-3">
+						<textarea class="form-control" id="sinopsis" rows="5"
+							placeholder="Sinopsis del libro" th:field="*{sinopsis}"></textarea>
+					</div>
+					<div class="form-group justify-content-around mb-3">
+						<input type="file" name="file" class="form-control" />
+					</div>
+					<div class="d-flex mt-3">
+						<button type="submit" class="btn editar me-3" th:text="'Guardar'"></button>
+						<a th:href="@{/catalogo}" class="btn expurgar"
+							th:text="'Cancelar'"></a>
+					</div>
+				</form>
+			</div>
+
+			<div th:if="${edit}" class="formulario">
+				<h2 class="titulo-seccion " th:text="'Edición Libro'"></h2>
+				<form th:action="@{/catalogo/edit}" method="post"
+					th:object="${libro}" enctype="multipart/form-data">
+
+					<div class="form-group justify-content-around mb-3">
+						<input type="text" class="form-control" id="referencia" th:field="*{referencia}"
+							readonly>
+					</div>
+					<div class="form-group justify-content-around mb-3">
+						<input type="text" class="form-control" id="titulo"
+							th:field="*{titulo}">
+						<small class="form-text text-danger" th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></small>
+					</div>
+					<div class="form-group justify-content-around mb-3">
+						<input type="text" class="form-control" id="autor"
+							th:field="*{autor}">
+						<small class="form-text text-danger" th:if="${#fields.hasErrors('autor')}" th:errors="*{autor}"></small>
+					</div>
+					<div class="form-group justify-content-around mb-3">
+						<input type="date" class="form-control" id="fechaAdquisicion"
+							th:field="*{fechaAdquisicion}">
+						<small class="form-text text-danger" th:if="${#fields.hasErrors('fechaAdquisicion')}" th:errors="*{fechaAdquisicion}"></small>
+					</div>
+					<div class="d-flex">
+						<div class="form-check me-5">
+							<input class="form-check-input" type="radio"
+								th:field="*{expurgado}" th:value="true" /> <label
+								th:text="'Expurgado'"></label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="radio"
+								th:field="*{expurgado}" th:value="false" /> <label
+								th:text="'No Expurgado'"></label>
+						</div>
+					</div>
+					<div class="form-group d-flex justify-content-around mb-3">
+						<textarea class="form-control" id="sinopsis" rows="5"
+							th:field="*{sinopsis}"></textarea>
+					</div>
+					<div class="form-group d-flex justify-content-around mb-3">					
+						<img class="editar-portada" th:if="*{fotoPortada}" th:src="'/uploads/' + *{fotoPortada}"> 
+						<img class="editar-portada" th:unless="*{fotoPortada}"
+							th:src="@{/uploads/default.jpg}"> 
+						<input type="file" name="file" class="form-control" />
+					</div>
+					<div class="d-flex mt-3">
+						<button type="submit" class="btn editar me-3" th:text="'Guardar'"></button>
+						<a th:href="@{/catalogo}" class="btn expurgar"
+							th:text="'Cancelar'"></a>
+					</div>
+				</form>
+				
+			</div>
+
+
+			<div th:if="${prestar}"  class="formulario">				
+				<h2 class="titulo-seccion mt-3" th:text="'Préstamo Libro'"></h2>
+				<form th:action="@{/catalogo/prestar}" method="post"
+					th:object="${libro}">
+					<div class="form-group d-flex justify-content-around mb-3">
+						<input type="text" class="form-control" id="referencia" th:field="*{referencia}"
+							readonly>
+					</div>
+					<div class="form-group d-flex justify-content-around mb-3">
+						<input type="text" class="form-control" id="titulo"
+							th:field="*{titulo}" readonly>
+					</div>
+					<div class="form-group d-flex justify-content-around mb-3">
+						<input type="text" class="form-control" id="autor"
+							th:field="*{autor}" readonly>
+					</div>
+					<div class="form-group d-flex justify-content-around mb-3">
+						<input type="date" class="form-control" id="fechaAdquisicion"
+							th:field="*{fechaAdquisicion}" readonly>
+					</div>
+					<div class="d-flex">
+						<div class="form-check me-5">
+							<input class="form-check-input" type="radio"
+								th:field="*{expurgado}" th:value="true" disabled /> <label
+								th:text="'Expurgado'"></label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="radio"
+								th:field="*{expurgado}" th:value="false" disabled /> <label
+								th:text="'No Expurgado'"></label>
+						</div>
+					</div>
+					<div class="form-group d-flex justify-content-around mb-3">
+						<textarea class="form-control" id="sinopsis"
+							th:field="*{sinopsis}" readonly></textarea>
+					</div>
+					<div class="form-group d-flex justify-content-start mb-3">
+						<img th:if="*{fotoPortada}" th:src="'/uploads/' + *{fotoPortada}"
+							width="150"> <img th:unless="*{fotoPortada}"
+							th:src="@{/uploads/default.jpg}" width="150">
+					</div>
+					<div class="col-6 mt-5">
+						 <label for="form-select" class="form-label bold select-title">Listado de Socios</label>
+						<select class="form-select" th:field="*{socio}">							
+							<option th:each="socio: ${socios}" th:value="${socio.id}"
+								th:text="${socio.nombre} +' '+  ${socio.apellidos}"></option>
+						</select>
+					</div>
+					<div class="d-flex mt-3">
+						<button type="submit" class="btn editar me-3" th:text="'Prestar'"></button>
+						<a th:href="@{/catalogo}" class="btn expurgar"
+							th:text="'Cancelar'"></a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</main>
+
+	<footer th:insert="fragments/footer :: footer"></footer>
+
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core"
+		integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+		integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+		crossorigin="anonymous"></script>
+</body>
+</html>

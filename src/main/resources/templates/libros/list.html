@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
+<link rel="stylesheet" th:href="@{/css/styles.css}">
+<title>Biblioteca</title>
+</head>
+<body>
+
+	<header th:insert="/fragments/header :: header"></header>
+
+	<nav th:insert="/fragments/nav :: nav"></nav>
+
+	<main>
+
+		<div class="container pt-3">
+
+			<div
+				class="nuevo-libro d-flex align-items-center justify-content-end">
+				<a th:href="@{/catalogo/create}" class="btn nuevo"
+					th:text="'Nuevo Libro'"></a>
+			</div>
+
+
+			<h2 class="titulo-seccion" th:text="'Libros del catálogo'"></h2>
+
+			<div>
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th class="col-1 text-center">Portada</th>
+							<th class="col-1 text-center">Referencia</th>
+							<th class="col-2 text-center">Titulo</th>
+							<th class="col-2 text-center">Autor</th>
+							<th class="col-2 text-center">Adquirido</th>
+							<th class="col-1 text-center">Expurgado</th>
+							<th class="col-1"></th>
+							<th class="col-1"></th>
+							<th class="col-1"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="libro : ${list}"
+							th:classappend="${libro.expurgado} ? expurgado : null">
+							<th class="col-1 text-center  align-middle"><img class="portada ms-3"
+								th:if="${libro.fotoPortada != null}"
+								th:src="@{'/uploads/' + ${libro.fotoPortada}}"
+								th:alt="${libro.fotoPortada}" /> <img class="portada ms-3"
+								th:unless="${libro.fotoPortada != null}"
+								th:src="@{'/uploads/default.png'}" th:alt="${libro.fotoPortada}" />
+							</th>
+							<th class="col-1 text-center align-middle" th:text="${libro.referencia}"></th>
+							<th class="col-1 text-center align-middle" th:text="${libro.titulo}"></th>
+							<th class="col-1 text-center align-middle" th:text="${libro.autor}"></th>
+							<th class="col-1 text-center align-middle"
+								th:text="${#dates.format(libro.fechaAdquisicion, 'dd/MM/yyyy')}"></th>
+							<th class="col-1 text-center align-middle" th:if="${libro.expurgado}"
+								th:text="'Si'"></th>
+							<th class="col-1 text-center align-middle" th:unless="${libro.expurgado}"
+								th:text="'No'"></th>
+							<th class="col-1 text-center align-middle"><a
+								th:href="@{/catalogo/edit/} + ${libro.referencia}"
+								class="btn editar" th:text="'Editar'"></a></th>
+							<th class="col-1 text-center align-middle"
+								th:if="${#lists.isEmpty(libro.socio) and !libro.expurgado} "><a
+								th:href="@{/catalogo/prestar/}+ ${libro.referencia}"
+								class="btn prestar" th:text="'Prestar'"></a></th>
+							<th class="col-1 text-center align-middle"
+								th:if="${not #lists.isEmpty(libro.socio)}"><a
+								th:href="@{/catalogo/devolver/}+ ${libro.referencia}"
+								class="btn devolver" th:text="'Devolver'"></a></th>
+							<th class="col-1 text-center align-middle"><a th:if="${libro.expurgado}"
+								th:href="@{/catalogo/activar/}+ ${libro.referencia}"
+								class="btn activar" th:text="'Activar'"></a> <a
+								th:unless="${libro.expurgado}"
+								th:href="@{/catalogo/expurgar/} + ${libro.referencia}"
+								class="btn expurgar" th:text="'Expurgar'"></a></th>
+							<th class="col-1 text-center align-middle" th:if="${libro.expurgado}"></th>
+
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+	</main>
+
+	<footer th:insert="fragments/footer :: footer"></footer>
+
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core"
+		integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+		integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+		crossorigin="anonymous"></script>
+</body>
+</html>
